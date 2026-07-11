@@ -10,12 +10,16 @@ This repository contains the implementation of an enhanced YOLOv8s model designe
 
 ## 📊 Key Results
 
-| Dataset      | mAP50 (%) | mAP50‑95 (%) | Params (M) | FLOPs (G) | Input Size |
-|--------------|-----------|--------------|------------|-----------|------------|
-| VisDrone2019 | **48.06**  | 31.9         | 9.5        | 50.0      | 768        |
-| DOTA         | **74.4**   | 49.7         | 9.5        | 50.0      | 768        |
+| Model          | Dataset      | mAP50 (%) | mAP50‑95 (%) | Params (M) | FLOPs (G) |
+|----------------|--------------|-----------|--------------|------------|-----------|
+| YOLOv8s        | VisDrone     | 36.4      | 21.6         | 11.1       | 28.5      |
+| Ni et al. (2024) | VisDrone   | 47.1      | 28.7         | 10.2       | 64.9      |
+| **Ours**       | VisDrone     | **48.06** | **31.9**     | **9.5**    | **50.0**  |
+| YOLOv8s        | DOTA         | 70.7      | 46.7         | 11.1       | 28.5      |
+| Ni et al. (2024) | DOTA       | 74.2      | 49.7         | 10.2       | 64.9      |
+| **Ours**       | DOTA         | **74.4**  | **49.7**     | **9.5**    | **50.0**  |
 
-Compared to the baseline YOLOv8s (36.4% VisDrone, 70.7% DOTA) and the previous improved YOLOv8s by Ni et al. (47.1% VisDrone, 74.2% DOTA), our model achieves **higher accuracy with fewer parameters and lower FLOPs**.
+Our model surpasses the previous state‑of‑the‑art (Ni et al., 2024) with **higher accuracy** (+0.96% on VisDrone, +0.2% on DOTA), **fewer parameters** (9.5M vs 10.2M), and **lower FLOPs** (50G vs 64.9G).
 
 ---
 
