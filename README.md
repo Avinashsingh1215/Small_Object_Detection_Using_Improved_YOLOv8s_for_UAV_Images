@@ -39,7 +39,7 @@ Our model surpasses the previous state‑of‑the‑art (Ni et al., 2024) with *
 
 ---
 
-## 📦 Installation
+## 📦 Install dependencies
 
 ### Prerequisites
 - Python 3.10+
