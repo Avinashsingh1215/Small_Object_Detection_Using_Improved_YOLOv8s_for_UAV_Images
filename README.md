@@ -57,8 +57,8 @@ cd Small_Object_Detection_Using_Improved_YOLOv8s_for_UAV_Images
 pip install -r requirements.txt
 ```
 
-### 📂 Dataset Preparation
-# VisDrone2019
+## 📂 Dataset Preparation
+#### VisDrone2019
 
 1. Download from VisDrone official.
 
@@ -69,7 +69,7 @@ pip install -r requirements.txt
    python scripts/convert_visdrone_to_yolo.py
    ```
 
-# DOTA v1.0
+#### DOTA v1.0
 
 1. Download DOTA images and annotations from the official DOTA website.
 
@@ -80,14 +80,14 @@ pip install -r requirements.txt
    python tile_dota_640.py
      ```
 
-### 🏋️ Training
+## 🏋️ Training
 
-# VisDrone
+#### VisDrone
 ```bash
 python train.py --config configs/visdrone_config.yaml
 ```
 
-# DOTA
+#### DOTA
 ```bash
 python train.py --config configs/dota_config.yaml
 ```
@@ -97,19 +97,19 @@ Use a larger model (YOLOv8m) for potentially higher accuracy:
 python train.py --config configs/dota_config.yaml --large
 ```
 
-### 🔍 Evaluation
-# Evaluate a trained model on the validation set:
+## 🔍 Evaluation
+#### Evaluate a trained model on the validation set:
 ```bash
 python eval.py --weights runs/.../weights/best.pt --data configs/visdrone_config.yaml
 ```
 
-# Test‑Time Augmentation (TTA)
+#### Test‑Time Augmentation (TTA)
 TTA typically adds 1–2% mAP:
 ```bash
 yolo val model=best.pt data=data/dota/dota_tiled.yaml imgsz=768 augment=True plots=True save_json=True
 ```
 
-### 📁 Project Structure
+## 📁 Project Structure
 ```bash
 .
 ├── configs/                 # YAML configuration files (dataset paths, hyperparameters)
