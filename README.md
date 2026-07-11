@@ -50,3 +50,99 @@ Our model surpasses the previous state‑of‑the‑art (Ni et al., 2024) with *
 ```bash
 git clone https://github.com/Avinashsingh1215/Small_Object_Detection_Using_Improved_YOLOv8s_for_UAV_Images.git
 cd Small_Object_Detection_Using_Improved_YOLOv8s_for_UAV_Images
+```
+
+## Install dependencies
+```bash
+pip install -r requirements.txt
+```
+
+### 📂 Dataset Preparation
+# VisDrone2019
+
+1. Download from VisDrone official.
+
+2. Place the VisDrone2019-DET-train and VisDrone2019-DET-val folders in data/visdrone/raw/.
+
+3. Convert annotations to YOLO format:
+   ```bash
+   python scripts/convert_visdrone_to_yolo.py
+   ```
+
+# DOTA v1.0
+
+1. Download DOTA images and annotations from the official DOTA website.
+
+2. Place train/ and val/ folders inside data/dota/raw/.
+
+3. Tile images (640×640, 200 overlap) and generate the YOLO dataset:
+    ```bash
+   python tile_dota_640.py
+     ```
+
+### 🏋️ Training
+
+# VisDrone
+```bash
+python train.py --config configs/visdrone_config.yaml
+```
+
+# DOTA
+```bash
+python train.py --config configs/dota_config.yaml
+```
+
+Use a larger model (YOLOv8m) for potentially higher accuracy:
+```bash
+python train.py --config configs/dota_config.yaml --large
+```
+
+### 🔍 Evaluation
+# Evaluate a trained model on the validation set:
+```bash
+python eval.py --weights runs/.../weights/best.pt --data configs/visdrone_config.yaml
+```
+
+# Test‑Time Augmentation (TTA)
+TTA typically adds 1–2% mAP:
+```bash
+yolo val model=best.pt data=data/dota/dota_tiled.yaml imgsz=768 augment=True plots=True save_json=True
+```
+
+### 📁 Project Structure
+```bash
+.
+├── configs/                 # YAML configuration files (dataset paths, hyperparameters)
+│   ├── dota_config.yaml
+│   ├── dota_multiscale_training.yaml
+│   └── visdrone_config.yaml
+├── losses/                  # Custom loss functions (WIOUv3)
+│   └── wiou_loss.py
+├── models/                  # Custom neural network modules
+│   ├── attention.py         # Coordinated Attention
+│   ├── custom_yolo.py       # Custom YOLOv8 assembly
+│   ├── pmse.py              # PMSE and LightweightPMSE
+│   └── scfpn.py             # SCFPN with weighted fusion
+├── scripts/                 # Dataset conversion utilities
+│   └── convert_visdrone_to_yolo.py
+├── utils/                   # Training utilities
+│   ├── assigner.py          # Dynamic label assigner
+│   ├── ema.py               # Exponential Moving Average
+│   └── plots.py             # Plotting training curves
+├── train.py                 # Main training entry point
+├── eval.py                  # Evaluation script
+├── tile_dota_640.py         # DOTA tiling script
+├── requirements.txt         # Python dependencies
+├── README.md                # This file
+└── LICENSE                  # MIT License
+```
+
+## 🙏 Acknowledgements
+
+- **Base paper: Ni et al., A Small‑Object Detection Model Based on Improved YOLOv8s for UAV Image Scenarios, Remote Sensing 2024.
+
+- **VisDrone2019 dataset: Zhu et al., Detection and Tracking Meet Drones Challenge, TPAMI 2021.
+
+- **DOTA dataset: Xia et al., DOTA: A Large-scale Dataset for Object Detection in Aerial Images, CVPR 2018.
+
+- **Ultralytics YOLOv8 framework – the foundation of our implementation.
