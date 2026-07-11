@@ -1,0 +1,59 @@
+# configs/dota_config.yaml
+data: /home/user1/aman2/Small_Obj_Detection/Dataset2/dota_tiled.yaml   # MUST be created by tiling script
+epochs: 500
+batch: 16
+imgsz: 768
+device: [0, 1]
+workers: 8
+
+optimizer: SGD
+lr0: 0.02              # higher initial LR for DOTA
+lrf: 0.0005
+momentum: 0.937
+weight_decay: 0.0005
+warmup_epochs: 5
+warmup_momentum: 0.8
+warmup_bias_lr: 0.1
+
+# Loss weights (keep as standard)
+box: 7.5
+cls: 0.5
+dfl: 1.5
+
+# Augmentations – no mixup/copy_paste (they hurt sparse aerial objects)
+hsv_h: 0.02
+hsv_s: 0.7
+hsv_v: 0.4
+degrees: 15.0
+translate: 0.2
+scale: 0.8
+shear: 0.0
+perspective: 0.0
+flipud: 0.0
+fliplr: 0.5
+mosaic: 0.8
+mixup: 0.0
+copy_paste: 0.0
+
+patience: 100
+save_period: 20
+cache: False
+exist_ok: True
+pretrained: True
+resume: False
+amp: True
+cos_lr: True
+close_mosaic: 15
+label_smoothing: 0.0
+dropout: 0.0
+
+val: True
+plots: True
+conf: 0.1
+iou: 0.6
+max_det: 300
+multi_scale: false   # Already tiled, no need
+
+project: runs/dota_experiment
+name: dota_optimized
+ema_decay: 0.9999

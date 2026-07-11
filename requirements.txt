@@ -1,0 +1,13 @@
+torch>=2.0.0
+torchvision>=0.15.0
+ultralytics>=8.0.196
+opencv-python==4.8.1.78
+pyyaml
+pandas
+matplotlib
+seaborn
+tqdm
+ensemble-boxes
+wandb
+scikit-learn
+pillow
